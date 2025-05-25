@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+*{
+	font-family: "Times new Roman", Times, serif;
+}
+
+.container, .table{
+    width: 700px;
+    height: 250px;	
+}
+
+.table, th, td {
+	border: 1px solid black;
+}
+
+.categories, h2 {
+	font-weight: bold;
+}
