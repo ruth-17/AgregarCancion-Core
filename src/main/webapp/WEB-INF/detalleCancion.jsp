@@ -19,6 +19,9 @@
                   <p>Fecha de Subida: ${cancion.fechaCreacion}</p>
                   <p>Última modificación: ${cancion.fechaActualizacion}</p>
             </div>
+            <a href="/canciones/formulario/editar/${cancion.id}">
+                  <button>Editar Canción</button>
+            </a>
             <a href="/canciones">Volver a la lista de canciones</a>
       </body>
 </html>

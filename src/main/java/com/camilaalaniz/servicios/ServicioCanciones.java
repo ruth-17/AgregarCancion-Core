@@ -31,5 +31,9 @@ public class ServicioCanciones {
 	public Cancion agregarCancion(Cancion nuevaCancion) {
 		return this.repositorioCanciones.save(nuevaCancion);
 	}
+	
+	public Cancion actualizarCancion(Cancion actualizarCancion) {
+		return this.repositorioCanciones.save(actualizarCancion);
+	}
 
 }
