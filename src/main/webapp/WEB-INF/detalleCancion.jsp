@@ -19,9 +19,20 @@
                   <p>Fecha de Subida: ${cancion.fechaCreacion}</p>
                   <p>Última modificación: ${cancion.fechaActualizacion}</p>
             </div>
-            <a href="/canciones/formulario/editar/${cancion.id}">
-                  <button>Editar Canción</button>
-            </a>
-            <a href="/canciones">Volver a la lista de canciones</a>
+            <div>
+                  <a href="/canciones/formulario/editar/${cancion.id}">
+                        <button>Editar Canción</button>
+                  </a>
+            </div>
+            <div>
+                  <form action="/canciones/eliminar/${cancion.id}" method="POST">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button>Eliminar Canción</button>
+                  </form>
+            </div>
+            <div>
+                  <a href="/canciones">Volver a la lista de canciones</a>
+            </div>
+            
       </body>
 </html>
