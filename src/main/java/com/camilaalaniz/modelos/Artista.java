@@ -1,42 +1,39 @@
 package com.camilaalaniz.modelos;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Size;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 
 @Entity
-@Table(name="canciones")
-public class Cancion {
-	
-  //tablas
-	
+@Table(name="artistas")
+public class Artista {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min=5, message="Introduzca al menos 3 caracteres.")
-	private String titulo;
+	@Size(min=3, message="Introduzca al menos 3 caracteres.")
+	private String nombre;
 	
 	@Size(min=3, message="Introduzca al menos 3 caracteres.")
-	private String album;
+	private String apellido;
 	
 	@Size(min=3, message="Introduzca al menos 3 caracteres.")
-	private String genero;
-	
-	@Size(min=3, message="Introduzca al menos 3 caracteres.")
-	private String idioma;
+	private String biografia;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_creacion")
@@ -46,16 +43,15 @@ public class Cancion {
 	@Column(name="fecha_actualizacion")
 	private Date fechaActualizacion;
 	
-	@ManyToOne
-	@JoinColumn(name="id_artista")
-	private Artista artista;
+	@OneToMany(mappedBy = "artista", cascade = CascadeType.ALL)
+	private List<Cancion> canciones;
 	
-  //constructor
+	//constructor
 	
-	public Cancion() {}
+	public Artista() {}
 	
-  //geters y seters
-
+	//geters y seters
+	
 	public Long getId() {
 		return id;
 	}
@@ -64,36 +60,28 @@ public class Cancion {
 		this.id = id;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getAlbum() {
-		return album;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setAlbum(String album) {
-		this.album = album;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
-	public String getGenero() {
-		return genero;
+	public String getBiografia() {
+		return biografia;
 	}
 
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public String getIdioma() {
-		return idioma;
-	}
-
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
 	}
 
 	public Date getFechaCreacion() {
@@ -111,13 +99,13 @@ public class Cancion {
 	public void setFechaActualizacion(Date fechaActualizacion) {
 		this.fechaActualizacion = fechaActualizacion;
 	}
-
-	public Artista getArtista() {
-		return artista;
+	
+	public List<Cancion> getCanciones() {
+		return canciones;
 	}
 
-	public void setArtista(Artista artista) {
-		this.artista = artista;
+	public void setCanciones(List<Cancion> canciones) {
+		this.canciones = canciones;
 	}
 
 	@PrePersist

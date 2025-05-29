@@ -11,7 +11,7 @@
             <h2>Detalles</h2>
             <div>
                   <h4>${cancion.titulo}</h4>
-                  <p>Artista: ${cancion.artista}</p>
+                  <p>Artista: ${cancion.artista.nombre} ${cancion.artista.apellido}</p>
                   <p>Álbum: ${cancion.album}</p>
                   <p>Género: ${cancion.genero}</p>
                   <p>Idioma: ${cancion.idioma}</p>

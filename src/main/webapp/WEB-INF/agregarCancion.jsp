@@ -16,9 +16,14 @@
                         <form:errors path="titulo"></form:errors>
                   </div>
                   <div>
-                        <form:label path="artista">Artista: </form:label>
-                        <form:input path="artista"/>
-                        <form:errors path="artista"></form:errors>
+                        <label id="idArtista">Artista: </label>
+                        <form:select path="artista.id" id="idArtista">
+                              <c:forEach var="artista" items="${listaArtistas}">
+                                    <option value="${artista.id}">
+                                          ${artista.nombre} ${artista.apellido}
+                                    </option>
+                              </c:forEach>
+                        </form:select>
                   </div>
                   <div>
                         <form:label path="album">Álbum: </form:label>

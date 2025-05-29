@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.camilaalaniz.modelos.Artista;
 import com.camilaalaniz.modelos.Cancion;
+import com.camilaalaniz.servicios.ServicioArtistas;
 import com.camilaalaniz.servicios.ServicioCanciones;
 
 import jakarta.validation.Valid;
@@ -23,9 +26,12 @@ public class ControladorCanciones {
 	
 	@Autowired
 	private final ServicioCanciones servicioCanciones;
+	private final ServicioArtistas servicioArtistas;
 	
-	public ControladorCanciones(ServicioCanciones servicioCanciones) {
+	public ControladorCanciones(ServicioCanciones servicioCanciones,
+			                    ServicioArtistas servicioArtistas) {
 		this.servicioCanciones = servicioCanciones;
+		this.servicioArtistas = servicioArtistas;
 	}
 	
 	@GetMapping("/canciones")
@@ -43,7 +49,10 @@ public class ControladorCanciones {
 	}
 	
 	@GetMapping("/canciones/formulario/agregar")
-	public String formularioAgregarCancion(@ModelAttribute("cancion") Cancion cancion) {
+	public String formularioAgregarCancion(@ModelAttribute("cancion") Cancion cancion,
+			                               Model modelo) {
+		List<Artista> listaDeArtistas = this.servicioArtistas.obtenerTodosLosArtistas();
+		modelo.addAttribute("listaArtistas", listaDeArtistas);
 		return "agregarCancion.jsp";
 	}
 	
@@ -53,7 +62,9 @@ public class ControladorCanciones {
 		if (validaciones.hasErrors()) {
 			return "agregarCancion.jsp";
 		}
-		
+		Long idArtista = cancion.getArtista().getId();
+		Artista artista = this.servicioArtistas.obtenerArtistaPorId(idArtista);
+		cancion.setArtista(artista);
 		this.servicioCanciones.agregarCancion(cancion);
 		return "redirect:/canciones";
 	}
